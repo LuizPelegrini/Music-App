@@ -14,6 +14,7 @@ import java.util.List;
 
 class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
+
     // Usage of ViewHolder design pattern for optimal performance
     static class ViewHolder
     {

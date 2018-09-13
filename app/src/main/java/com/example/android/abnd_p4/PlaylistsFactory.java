@@ -13,7 +13,7 @@ public class PlaylistsFactory {
     {
         ArrayList<Playlist> playlists = new ArrayList<>();
 
-        for (int i=0; i < 5; i++)
+        for (int i=0; i < 15; i++)
         {
             Playlist newPlaylist = new Playlist("Name" + i, R.mipmap.ic_launcher);
             for(int j = 0; j < 2; j++)
@@ -21,6 +21,7 @@ public class PlaylistsFactory {
                 Song song = new Song("Song " + j, "Artist " + j);
                 newPlaylist.AddNewSong(song);
             }
+            playlists.add(newPlaylist);
         }
 
         return playlists;
