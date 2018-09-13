@@ -35,6 +35,10 @@ public class Playlist implements Parcelable{
         return _imageId;
     }
 
+    public ArrayList<Song> getSongs() {
+        return _songs;
+    }
+
     //// Parcelable methods /////
     @Override
     public int describeContents() {

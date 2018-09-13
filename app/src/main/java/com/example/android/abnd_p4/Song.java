@@ -14,6 +14,14 @@ class Song implements Parcelable
         this._artistName = artistName;
     }
 
+    public String getName() {
+        return _name;
+    }
+
+    public String getArtistName() {
+        return _artistName;
+    }
+
     //// Parcelable methods /////
     @Override
     public int describeContents() {

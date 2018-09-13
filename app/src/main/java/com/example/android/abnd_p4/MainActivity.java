@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Playlist p = playlists.get(position);
                 Intent intent = new Intent(MainActivity.this, PlaylistActivity.class);
-                intent.putExtra("playlist", p);
+                intent.putExtra(PlaylistActivity.PLAYLIST, p);
                 startActivity(intent);
             }
         });
