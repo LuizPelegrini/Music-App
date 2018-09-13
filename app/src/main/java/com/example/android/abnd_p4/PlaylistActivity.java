@@ -13,7 +13,7 @@ public class PlaylistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_playlist);
 
         Intent intent = getIntent();
-        Playlist p = (Playlist) intent.getParcelableExtra("playlist");
-        Log.d("PLAYLIST ACTIVITY", p.getName());
+        Playlist p = intent.getParcelableExtra("playlist");
+        Log.d("PLAYLIST ACTIVITY", ""+p.getSongsNumber());
     }
 }

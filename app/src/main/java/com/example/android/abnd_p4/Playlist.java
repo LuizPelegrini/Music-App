@@ -22,6 +22,7 @@ public class Playlist implements Parcelable{
         _songs.add(song);
     }
 
+    //// getters ////
     public String getName() {
         return _name;
     }
@@ -34,16 +35,21 @@ public class Playlist implements Parcelable{
         return _imageId;
     }
 
+    //// Parcelable methods /////
     @Override
     public int describeContents() {
         return 0;
     }
 
+    // Parcel the Playlist object, so I can attach it with an intent
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_name);
+        dest.writeInt(_imageId);
+        dest.writeTypedList(_songs);
     }
 
+    // CREATOR of the Playlist Parcelable
     public static final Parcelable.Creator<Playlist> CREATOR = new Parcelable.Creator<Playlist>(){
         @Override
         public Playlist[] newArray(int size) {
@@ -53,7 +59,10 @@ public class Playlist implements Parcelable{
         @Override
         public Playlist createFromParcel(Parcel source) {
             String name = source.readString();
-            return new Playlist(name, 0);
+            int imageId = source.readInt();
+            Playlist p = new Playlist(name, imageId);
+            source.readTypedList(p._songs, Song.CREATOR);
+            return p;
         }
     };
 }
