@@ -1,0 +1,5 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Playlists</string>
+    <string name="playlist_image_description">Playlist image</string>
+    <string name="number_songs"><xliff:g id="number" example="2">%d</xliff:g> songs</string>
+</resources>
