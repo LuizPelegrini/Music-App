@@ -1,21 +1,29 @@
 package com.example.android.abnd_p4;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+public class SongActivity extends AppCompatActivity{
 
-public class PlaylistActivity extends AppCompatActivity {
 
     public static final String PLAYLIST = "playlist";               // Standardize the playlist tag for easy modification
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playlist);
+        setContentView(R.layout.activity_songs);
+
+        LinearLayout linearLayout = findViewById(R.id.current_playing_song_linear_layout);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+            }
+        });
 
         // Gets the intent coming from MainActivity with Playlist data
         Playlist p = getIntent().getParcelableExtra(PLAYLIST);
@@ -26,5 +34,7 @@ public class PlaylistActivity extends AppCompatActivity {
         // Create an adapter for the songs list and attach it to the song list view
         SongAdapter adapter = new SongAdapter(this, p.getSongs());
         listView.setAdapter(adapter);
+        listView.setEnabled(false);
     }
+
 }

@@ -5,13 +5,15 @@ import android.os.Parcelable;
 
 class Song implements Parcelable
 {
-    private String _name;           // The name of this song
-    private String _artistName;     // Artist's name of this song
+    private String _name;                   // The name of this song
+    private String _artistName;             // Artist's name of this song
+    private boolean _isCurrentlyPlaying;    // Is this song being currently playing?
 
     Song(String name, String artistName)
     {
         this._name = name;
         this._artistName = artistName;
+        this._isCurrentlyPlaying = false;
     }
 
     public String getName() {
@@ -21,6 +23,8 @@ class Song implements Parcelable
     public String getArtistName() {
         return _artistName;
     }
+
+    public boolean getIsCurrentlyPlaying() { return _isCurrentlyPlaying; }
 
     //// Parcelable methods /////
     @Override
@@ -33,6 +37,7 @@ class Song implements Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_name);
         dest.writeString(_artistName);
+        dest.writeByte((byte)(_isCurrentlyPlaying ? 1:0));
     }
 
     // CREATOR of the Song Parcelable
@@ -41,7 +46,10 @@ class Song implements Parcelable
         public Song createFromParcel(Parcel source) {
             String name = source.readString();
             String artistName = source.readString();
-            return new Song(name, artistName);
+            Song song = new Song(name, artistName);
+            song._isCurrentlyPlaying = ((int)source.readByte()) == 1;
+
+            return song;
         }
 
         @Override

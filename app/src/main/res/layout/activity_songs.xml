@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    tools:context=".SongActivity">
 
     <LinearLayout
         android:id="@+id/current_playing_song_linear_layout"
@@ -36,7 +37,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/playlist_list_view"
-        tools:context=".MainActivity" />
+        android:id="@+id/song_list_view"
+        tools:context=".PlaylistActivity">
 
+    </ListView>
 </LinearLayout>

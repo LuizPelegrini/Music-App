@@ -7,17 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
 
 class SongAdapter extends ArrayAdapter<Song> {
 
+    public View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
     // Helper class to hold view references, ViewHolder design pattern
     static class ViewHolder
     {
         TextView songNameTextView;
         TextView artistNameTextView;
+        ImageButton playButton;
     }
 
     SongAdapter(@NonNull Context context, @NonNull List<Song> objects) {
@@ -40,6 +49,7 @@ class SongAdapter extends ArrayAdapter<Song> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.song_item, parent, false);
             holder.songNameTextView = convertView.findViewById(R.id.song_name_text_view);
             holder.artistNameTextView = convertView.findViewById(R.id.song_artist_text_view);
+            holder.playButton = convertView.findViewById(R.id.song_play_image_button);
 
             convertView.setTag(holder);
         }
@@ -52,6 +62,7 @@ class SongAdapter extends ArrayAdapter<Song> {
         // And set the data for each inner view
         holder.songNameTextView.setText(song.getName());
         holder.artistNameTextView.setText(song.getArtistName());
+//        holder.playButton.setImageResource(R.id.play_image);
 
         // Return the modified view
         return convertView;

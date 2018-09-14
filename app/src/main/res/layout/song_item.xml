@@ -35,14 +35,13 @@
             tools:text="Artist Name"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/play_image"
+    <ImageButton
+        android:id="@+id/song_play_image_button"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/song_play_button"
-        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"/>
 </RelativeLayout>
