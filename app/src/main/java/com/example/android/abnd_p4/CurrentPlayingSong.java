@@ -1,5 +1,7 @@
 package com.example.android.abnd_p4;
 
+import android.widget.ImageButton;
+
 class CurrentPlayingSong {
 
     /**
@@ -8,6 +10,7 @@ class CurrentPlayingSong {
     private static CurrentPlayingSong instance;
 
     private Song _currentSong;
+    private ImageButton _songButton;
 
     // Private constructor
     private CurrentPlayingSong(){}
@@ -23,8 +26,27 @@ class CurrentPlayingSong {
     }
 
     ////// getter /////
-    public void setCurrentSong(Song song) {
-        _currentSong = song;
+    public void setCurrentSong(Song song, ImageButton newImageButton) {
+        // If there is a song playing now, "pause" it
+        if(_currentSong != null) {
+            _currentSong.setIsCurrentlyPlaying(false);
+            newImageButton.setBackgroundResource(R.drawable.ic_pause_circle_filled);
+            _songButton.setBackgroundResource(R.drawable.ic_play_circle_filled);
+            _songButton = newImageButton;
+
+            _currentSong = song;
+            _currentSong.setIsCurrentlyPlaying(true);
+        }
+        else
+        {
+            // Updates the song currently playing
+            _currentSong = song;
+            _currentSong.setIsCurrentlyPlaying(true);
+            newImageButton.setBackgroundResource(R.drawable.ic_pause_circle_filled);
+            _songButton = newImageButton;
+        }
+
+
     }
 
     ///// setter /////

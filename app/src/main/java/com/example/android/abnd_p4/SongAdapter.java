@@ -14,13 +14,6 @@ import java.util.List;
 
 class SongAdapter extends ArrayAdapter<Song> {
 
-    public View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
-
     // Helper class to hold view references, ViewHolder design pattern
     static class ViewHolder
     {
@@ -59,12 +52,30 @@ class SongAdapter extends ArrayAdapter<Song> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        // And set the data for each inner view
-        holder.songNameTextView.setText(song.getName());
-        holder.artistNameTextView.setText(song.getArtistName());
-//        holder.playButton.setImageResource(R.id.play_image);
+        if(song != null)
+            setViewData(holder, song);
 
         // Return the modified view
         return convertView;
+    }
+
+    private void setViewData(ViewHolder holder, final Song songData)
+    {
+        // And set the data for each inner view
+        holder.songNameTextView.setText(songData.getName());
+        holder.artistNameTextView.setText(songData.getArtistName());
+        holder.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageButton imageButton = (ImageButton)v;
+                CurrentPlayingSong.getInstance().setCurrentSong(songData, imageButton);
+                imageButton.setBackgroundResource(R.drawable.ic_pause_circle_filled);
+            }
+        });
+
+        if(songData == CurrentPlayingSong.getInstance().getCurrentSong())
+            holder.playButton.setBackgroundResource(R.drawable.ic_pause_circle_filled);
+        else
+            holder.playButton.setBackgroundResource(R.drawable.ic_play_circle_filled);
     }
 }

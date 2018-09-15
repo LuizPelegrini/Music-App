@@ -16,15 +16,13 @@ class Song implements Parcelable
         this._isCurrentlyPlaying = false;
     }
 
-    public String getName() {
-        return _name;
-    }
-
-    public String getArtistName() {
-        return _artistName;
-    }
-
+    //// getters /////
+    public String getName() { return _name; }
+    public String getArtistName() { return _artistName; }
     public boolean getIsCurrentlyPlaying() { return _isCurrentlyPlaying; }
+
+    //// setter ////
+    public void setIsCurrentlyPlaying(boolean isPlayingNow) { this._isCurrentlyPlaying = isPlayingNow; }
 
     //// Parcelable methods /////
     @Override
