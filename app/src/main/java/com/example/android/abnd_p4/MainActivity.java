@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // Create a list of playlists
         final ArrayList<Playlist> playlists = PlaylistsFactory.createPlaylists();
 
+        // Update the top view that contains the info of the song playing
         updateCurrentPlayingSong(playlists);
 
         // Update current playing song
@@ -33,12 +34,18 @@ public class MainActivity extends AppCompatActivity {
         // Create a custom adapter for the playlist and attach it to the list view
         PlaylistAdapter playlistAdapter = new PlaylistAdapter(this, playlists);
         listView.setAdapter(playlistAdapter);
+
+        // Listen to any click event on any item of the list
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Playlist p = playlists.get(position);
+
+                // Create an intent containing playlist parcelable info
                 Intent intent = new Intent(MainActivity.this, SongActivity.class);
                 intent.putExtra(SongActivity.PLAYLIST, p);
+
+                // And send it to the song activity
                 startActivity(intent);
             }
         });
@@ -63,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    // Update the current playing song info in my playlists arraylist
+    // This is necessary because when I pass a Parcelable Playlist, it creates a copy of the playlist,
+    // so all the changes I make in the song activity does not reflect on this list
     private void updateCurrentPlayingSong(ArrayList<Playlist> playlists)
     {
         if(CurrentPlayingSong.getInstance().getCurrentSong() == null)
@@ -76,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
            {
                Song song = p.getSongs().get(j);
                if(song.getId() == CurrentPlayingSong.getInstance().getCurrentSong().getId())
-               {
                    song.setIsCurrentlyPlaying(true);
-               }
+               else
+                   song.setIsCurrentlyPlaying(false);
            }
         }
     }

@@ -8,7 +8,6 @@
     tools:context=".SongActivity">
 
     <LinearLayout
-        android:id="@+id/current_playing_song_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:orientation="vertical"
@@ -37,6 +36,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@drawable/list_divider"
+        android:dividerHeight="1dp"
         android:id="@+id/song_list_view"
         tools:context=".PlaylistActivity">
 

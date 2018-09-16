@@ -1,6 +1,7 @@
 package com.example.android.abnd_p4;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ class SongAdapter extends ArrayAdapter<Song> {
         // Gets the song from the arraylist
         Song song = getItem(position);
 
-        // Reference holder
+        // Reference currentHolder
         ViewHolder holder;
 
         // If there is no available view, inflate a new one and hold the reference for its inner views
@@ -55,7 +56,7 @@ class SongAdapter extends ArrayAdapter<Song> {
         // And set the data for each inner view
         holder.songNameTextView.setText(song.getName());
         holder.artistNameTextView.setText(song.getArtistName());
-
+        holder.playImageView.setImageResource(song.getImageId());
 
         // Return the modified view
         return convertView;

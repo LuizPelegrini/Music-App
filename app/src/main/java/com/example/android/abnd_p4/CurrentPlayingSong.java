@@ -1,7 +1,5 @@
 package com.example.android.abnd_p4;
 
-import android.widget.ImageView;
-
 class CurrentPlayingSong {
 
     /**
@@ -9,7 +7,8 @@ class CurrentPlayingSong {
      * */
     private static CurrentPlayingSong instance;
 
-    private Song _currentSong;
+    private Song _currentSong;                          // The current song playing
+    private SongAdapter.ViewHolder _currentHolder;      // The reference to the view which represents the currently playing song
 
     // Private constructor
     private CurrentPlayingSong(){}
@@ -25,17 +24,10 @@ class CurrentPlayingSong {
     }
 
     ////// setter /////
-    public void setCurrentSong(Song songToPlay) {
-        if(_currentSong != null) {
-            _currentSong.setIsCurrentlyPlaying(false);
-//            _currentImageView.setBackgroundResource(_currentSong.getId());
-        }
-
-        _currentSong = songToPlay;
-    }
+    public void setCurrentSong(Song songToPlay) { _currentSong = songToPlay; }
+    public void setCurrentHolder(SongAdapter.ViewHolder holder) { _currentHolder = holder; }
 
     ///// getter /////
-    public Song getCurrentSong() {
-        return this._currentSong;
-    }
+    public Song getCurrentSong() { return this._currentSong; }
+    public SongAdapter.ViewHolder getCurrentHolder() { return _currentHolder; }
 }
