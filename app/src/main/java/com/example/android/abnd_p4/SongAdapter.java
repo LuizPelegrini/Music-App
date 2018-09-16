@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -19,7 +19,7 @@ class SongAdapter extends ArrayAdapter<Song> {
     {
         TextView songNameTextView;
         TextView artistNameTextView;
-        ImageButton playButton;
+        ImageView playImageView;
     }
 
     SongAdapter(@NonNull Context context, @NonNull List<Song> objects) {
@@ -42,7 +42,7 @@ class SongAdapter extends ArrayAdapter<Song> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.song_item, parent, false);
             holder.songNameTextView = convertView.findViewById(R.id.song_name_text_view);
             holder.artistNameTextView = convertView.findViewById(R.id.song_artist_text_view);
-            holder.playButton = convertView.findViewById(R.id.song_play_image_button);
+            holder.playImageView = convertView.findViewById(R.id.song_play_image_view);
 
             convertView.setTag(holder);
         }
@@ -52,30 +52,12 @@ class SongAdapter extends ArrayAdapter<Song> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        if(song != null)
-            setViewData(holder, song);
+        // And set the data for each inner view
+        holder.songNameTextView.setText(song.getName());
+        holder.artistNameTextView.setText(song.getArtistName());
+
 
         // Return the modified view
         return convertView;
-    }
-
-    private void setViewData(ViewHolder holder, final Song songData)
-    {
-        // And set the data for each inner view
-        holder.songNameTextView.setText(songData.getName());
-        holder.artistNameTextView.setText(songData.getArtistName());
-        holder.playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageButton imageButton = (ImageButton)v;
-                CurrentPlayingSong.getInstance().setCurrentSong(songData, imageButton);
-                imageButton.setBackgroundResource(R.drawable.ic_pause_circle_filled);
-            }
-        });
-
-        if(songData == CurrentPlayingSong.getInstance().getCurrentSong())
-            holder.playButton.setBackgroundResource(R.drawable.ic_pause_circle_filled);
-        else
-            holder.playButton.setBackgroundResource(R.drawable.ic_play_circle_filled);
     }
 }

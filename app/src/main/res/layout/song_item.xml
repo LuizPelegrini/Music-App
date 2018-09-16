@@ -35,13 +35,13 @@
             tools:text="Artist Name"/>
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/song_play_image_button"
+    <ImageView
+        android:id="@+id/song_play_image_view"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/ic_play_circle_filled"
+        android:src="@drawable/ic_play_circle_filled"
         android:contentDescription="@string/song_play_button"/>
 </RelativeLayout>

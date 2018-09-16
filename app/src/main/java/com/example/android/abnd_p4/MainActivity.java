@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         // Create a list of playlists
         final ArrayList<Playlist> playlists = PlaylistsFactory.createPlaylists();
 
+        updateCurrentPlayingSong(playlists);
+
         // Update current playing song
         updateCurrentPlayingSongUI();
 
@@ -49,13 +51,35 @@ public class MainActivity extends AppCompatActivity {
         TextView songTextView = findViewById(R.id.current_playing_song_text_view);
         TextView artistTextView = findViewById(R.id.current_playing_artist_text_view);
 
-        if(currentPlayingSong != null) {
+        if(currentPlayingSong != null)
+        {
             songTextView.setText(currentPlayingSong.getName());
             artistTextView.setText(currentPlayingSong.getArtistName());
         }
-        else {
+        else
+        {
             songTextView.setText(getResources().getString(R.string.no_song_playing));
             artistTextView.setText("");
+        }
+    }
+
+    private void updateCurrentPlayingSong(ArrayList<Playlist> playlists)
+    {
+        if(CurrentPlayingSong.getInstance().getCurrentSong() == null)
+            return;
+
+        // WARNING: Not a very clever way to find an id, but it is fine for this project
+        for(int i=0;i < playlists.size(); i++)
+        {
+           Playlist p = playlists.get(i);
+           for (int j = 0; j < p.getSongs().size(); j++)
+           {
+               Song song = p.getSongs().get(j);
+               if(song.getId() == CurrentPlayingSong.getInstance().getCurrentSong().getId())
+               {
+                   song.setIsCurrentlyPlaying(true);
+               }
+           }
         }
     }
 }
